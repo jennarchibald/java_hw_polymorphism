@@ -1,6 +1,7 @@
 package StallsTest;
 
 import Stalls.CandyFlossStall;
+import Visitors.Visitor;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -33,5 +34,11 @@ public class CandyFlossStallTest {
     @Test
     public void hasRating(){
         assertEquals(8, candyFlossStall.getRating());
+    }
+
+    @Test
+    public void hasPrice(){
+        Visitor visitor = new Visitor(12, 140, 22.50);
+        assertEquals(4.20, candyFlossStall.priceFor(visitor), 0.01);
     }
 }

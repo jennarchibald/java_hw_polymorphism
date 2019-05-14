@@ -44,4 +44,9 @@ public class BeerStallTest {
     public void hasRating(){
         assertEquals(9, beerStall.getRating());
     }
+
+    @Test
+    public void hasPrice(){
+        assertEquals(6.60, beerStall.priceFor(visitor1), 0.01);
+    }
 }

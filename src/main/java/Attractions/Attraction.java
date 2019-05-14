@@ -1,6 +1,7 @@
 package Attractions;
 
 import Interfaces.IReviewed;
+import Visitors.Visitor;
 
 public abstract class Attraction implements IReviewed {
 
@@ -19,4 +20,8 @@ public abstract class Attraction implements IReviewed {
     public int getRating() {
         return rating;
     }
+
+    public String visit(Visitor visitor){
+        return name + " was fun!";
+    };
 }

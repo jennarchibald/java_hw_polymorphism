@@ -26,4 +26,9 @@ public class VisitorTest {
     public void hasMoney(){
         assertEquals(22.50, visitor.getMoney(), 0.01);
     }
+    @Test
+    public void canBeCharged(){
+        visitor.charge(2.75);
+        assertEquals(19.75, visitor.getMoney(), 0.01);
+    }
 }

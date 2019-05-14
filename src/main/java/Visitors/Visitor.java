@@ -23,4 +23,8 @@ public class Visitor {
     public double getMoney() {
         return money;
     }
+
+    public void charge(double price){
+        money -= price;
+    }
 }

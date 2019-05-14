@@ -1,54 +1,59 @@
 package ThemePark;
 
 import Attractions.Attraction;
-import Attractions.Park;
 import Interfaces.IReviewed;
-import Stalls.Stall;
+import Interfaces.ISecurity;
 import Visitors.Visitor;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class ThemePark {
 
     private String name;
-    private ArrayList<Attraction> attractions;
-    private ArrayList<Stall> stalls;
+    private ArrayList<IReviewed> placesToVisit;
 
-    public ThemePark(String name, ArrayList<Attraction> attractions, ArrayList<Stall> stalls) {
+    public ThemePark(String name, ArrayList<IReviewed> placesToVisit) {
         this.name = name;
-        this.attractions = attractions;
-        this.stalls = stalls;
+        this.placesToVisit = placesToVisit;
     }
 
     public String getName() {
         return name;
     }
 
-    public int attractionCount() {
-        return attractions.size();
-    }
-
-    public int stallCount() {
-        return stalls.size();
+    public int placesCount() {
+        return placesToVisit.size();
     }
 
     public ArrayList<IReviewed> getAllReviewed() {
-        ArrayList<IReviewed> reviewed = new ArrayList<>();
-        for(Attraction attraction : attractions){
-            reviewed.add(attraction);
-        }
-        for (Stall stall : stalls) {
-            reviewed.add(stall);
-        }
-        return reviewed;
+        return placesToVisit;
     }
 
     public String visit(Visitor visitor, Attraction attraction) {
-        if (this.attractions.contains(attraction)) {
-            return attraction.getName() + " was great";
+        if (this.placesToVisit.contains(attraction)) {
+            return attraction.visit(visitor);
         } else {
             return attraction.getName() + " isn't here...";
         }
+    }
+
+    public ArrayList<IReviewed> getAllAllowedFor(Visitor visitor) {
+        ArrayList<IReviewed> allowedPlaces = new ArrayList<>();
+        for (IReviewed place : placesToVisit){
+            if (place instanceof ISecurity && ((ISecurity) place).isAllowedTo(visitor)){
+               allowedPlaces.add(place);
+            } else if (!(place instanceof ISecurity)){
+                allowedPlaces.add(place);
+            }
+        }
+        return allowedPlaces;
+    }
+
+    public String getAllReviews() {
+        String reviews = "";
+        for (IReviewed place : placesToVisit){
+            reviews += place.getName() + ": " + place.getRating() + ", ";
+        }
+        String allReviews = reviews.substring(0, reviews.length() -2);
+        return allReviews;
     }
 }

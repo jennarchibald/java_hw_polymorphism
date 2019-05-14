@@ -34,4 +34,15 @@ public class PlaygroundTest {
     public void hasRating(){
         assertEquals(9, playground.getRating());
     }
+
+
+    @Test
+    public void canbeVisited(){
+        assertEquals("Tot Spot was fun!", playground.visit(visitor));
+    }
+    @Test
+    public void isFree(){
+        playground.visit(visitor);
+        assertEquals(22.40, visitor.getMoney(), 0.01);
+    }
 }
