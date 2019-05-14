@@ -98,6 +98,11 @@ public class ThemeParkTest {
     }
 
     @Test
+    public void cannotVisitIfNotAllowed(){
+        assertEquals("I'm not allowed...", themePark.visit(visitor, rollercoaster));
+    }
+
+    @Test
     public void canGetAllReviews(){
         assertEquals("Menace: 6, Bobs Dodges: 7, Tot Spot: 9, Green Acres: 7, Bobs Beers: 8, Fairy Floss: 9, Frosties: 8", themePark.getAllReviews());
     }

@@ -29,9 +29,11 @@ public class ThemePark {
     }
 
     public String visit(Visitor visitor, Attraction attraction) {
-        if (this.placesToVisit.contains(attraction)) {
-            return attraction.visit(visitor);
-        } else {
+        if (this.getAllAllowedFor(visitor).contains(attraction)) {
+                return attraction.visit(visitor);
+             } else if (this.placesToVisit.contains(attraction)) {
+                 return "I'm not allowed...";
+             } else {
             return attraction.getName() + " isn't here...";
         }
     }
